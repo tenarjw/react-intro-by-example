@@ -1,0 +1,2 @@
+babel r03.jsx > r03b.js
+browserify r03b.js -o r03.js

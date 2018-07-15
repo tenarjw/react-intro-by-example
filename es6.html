@@ -1,0 +1,321 @@
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+   function sdisp(sid) {
+       var s=$('#s'+sid);
+       var code=$('<pre><code id="t'+sid+'" class="javascript"></code><pre>');
+       code.text(s.text()).css('display','block').insertAfter('#s'+sid).show();
+        hljs.highlightBlock(code[0]);
+     
+   }
+  </script>
+  <style>
+    pre,code{
+        border: solid gray 1px;
+        width:100%;
+        height: auto;
+        border:1px solid #000000;
+        background-color:#eeeeee;
+        padding:20px;
+        font-family: monospace;
+        font-size: 110%;
+    }
+  </style>
+    
+</head>
+<body>
+Otwórz konsolę przeglądarki i obserwuj efekty wykonania kolejnych skryptów.<br />
+  zob też: http://es6-features.org/#BlockScopedVariables
+
+<br /><hr /><h3>let i const</h3>
+<script id="s01">
+function es6_01() {
+  let name="Jan Kowalski";
+  const witaj = `Witaj ${name}
+   na naszej stronie`;
+  console.log(witaj);
+}
+</script>
+<button onclick="es6_01();">wykonaj 01</button>
+<button onclick="sdisp('01');">Pokaż 01</button>
+
+<br /><hr /><h3>Formatowanie tekstu</h3>
+<script id='s02'>
+ function es6_02() {
+   let name="Nieznajomy";
+   let page="Nasza strona";
+   const h = `Witaj ${name}
+    na stronie ${page}
+    [${ new Date().toISOString().slice(0, 10) }]`;
+   console.log(h);
+}
+</script>
+<button onclick="es6_02()">wykonaj 02</button>
+<button onclick="sdisp('02');">Pokaż 02</button>
+
+<br /><hr /><h3>Definiowanie własnych tagów</h3>
+<script id="s03">
+ function es6_03() {
+   function tagH1(literals, ...substitutions) {
+    let result="<h1>";
+    substitutions.forEach( (s,i) => {  result+=literals[i]+s; } );
+    return result+"</h1>";
+  }
+  let name="Nieznajomy";
+  let page="Nasza strona";
+  console.log(tagH1`Witaj ${name} na ${page}`);
+}
+</script>
+<button onclick="es6_03()">wykonaj 03</button>
+<button onclick="sdisp('03');">Pokaż 03</button>
+
+<br /><hr /><h3>Wartości domyślne parametrów</h3>
+<script id="s04">
+ function es6_04() {
+   function kwota(ile, waluta='PLN', przed=false) {
+    return przed ? waluta+ile.toString() : ile.toString()+waluta;
+   }
+   console.log(kwota(12));
+   console.log(kwota(10,'$',true));
+   console.log(kwota(10,przed=true));
+}
+</script>
+<button onclick="es6_04()">wykonaj 04</button>
+<button onclick="sdisp('04');">Pokaż 04</button>
+
+<br /><hr /><h3>Parametry resztowe</h3>
+<script id="s05">
+ function es6_05() {
+   function sumuj(czynnik, ...reszta) {
+     for (liczba of reszta) czynnik+=liczba;
+     return czynnik;
+   }
+   console.log(sumuj(2,4,6,9));
+}
+</script>
+<button onclick="es6_05()">wykonaj 05</button>
+<button onclick="sdisp('05');">Pokaż 05</button>
+
+
+<br /><hr /><h3>spread operator</h3>
+<script id="s06">
+ function es6_06() {
+   let lista = ['b', 'c'];
+   console.log(['a',...lista,'d','e'].concat());
+}
+</script>
+<button onclick="es6_06()">wykonaj 06</button>
+<button onclick="sdisp('06');">Pokaż 06</button>
+
+
+
+<br /><hr /><h3>spread dla struktur</h3>
+<script id="s07">
+ function es6_07() {
+   let struktura = {2:'b', 3:'c'};
+   let struktura2={1:'a', ...struktura,4:'d'};
+   for (i in struktura2) {
+     console.log(i.toString()+' = '+struktura2[i]);
+   }
+ }
+</script>
+<button onclick="es6_07()">wykonaj 07</button>
+<button onclick="sdisp('07');">Pokaż 07</button>
+
+<br /><hr /><h3>for / of</h3>
+<script id="s08">
+function es6_08() {
+  // wersja uproszczona:
+  let lista=[1,2,3,5];
+  let suma=0;
+  for (n of lista.map( (x) => {return x*x*x;} ) ) suma+=n;
+  console.log(suma);
+}
+</script>
+<button onclick="es6_08()">wykonaj 08</button>
+<button onclick="sdisp('08');">Pokaż 08</button>
+
+<br /><hr /><h3>Mapowanie i funkcja strzałkowa</h3>
+<script id="s10">
+ function es6_10() {
+  let lista=[1,2,3,5];
+  let suma=0;
+  const licz = () => {
+    for (n of lista.map( x =>  {this.suma+=x*x*x} ) );
+    console.log(suma);
+  };
+  licz()
+  console.log(suma);
+}
+</script>
+<button onclick="es6_10()">wykonaj 10</button>
+<button onclick="sdisp('10');">Pokaż 10</button>
+
+<br /><hr /><h3>Symbole</h3>
+<script id="s11">
+function es6_11() {
+ let symbol=Symbol();
+ let symbol2=Symbol('s2');
+ console.log(String(symbol2));
+ console.log(String(symbol));
+}
+</script>
+<button onclick="es6_11()">wykonaj 11</button>
+<button onclick="sdisp('11');">Pokaż 11</button>
+
+
+<br /><hr /><h3>Map</h3>
+<script id="s12">
+ function es6_12() {
+   let map = new Map();
+   map.set('foo', 123);
+   map.get('foo')
+   map.has('foo')
+   map.delete('foo')
+   map.has('foo')
+  for (let key of map.keys()) {
+    console.log(key);
+  }
+  for (let value of map.values()) {
+    console.log(value);
+  }
+}
+</script>
+<button onclick="es6_12()">wykonaj 12</button>
+<button onclick="sdisp('12');">Pokaż 12</button>
+
+
+
+<br /><hr /><h3>Set + for/of</h3>
+<script id="s13">
+ function es6_13() {
+   let set = new Set();
+   set.add('red')
+   set.has('red')
+   set.delete('red')
+   set.has('red')
+   for (let x of set) {
+    console.log(x);
+   }
+}
+</script>
+<button onclick="es6_13()">wykonaj 13</button>
+<button onclick="sdisp('13');">Pokaż 13</button>
+
+
+<br /><hr /><h3>Generator / iterator</h3>
+<script id="s14">
+ function es6_14() {
+   function* generator() {
+      for (c=0; c<=9; c++) yield c;
+   }
+   var iterator_cyfr=generator();
+   var suma=0;
+   for (c of iterator_cyfr) suma+=c;
+   console.log(suma);
+}
+</script>
+<button onclick="es6_14()">wykonaj 14</button>
+<button onclick="sdisp('14');">Pokaż 14</button>
+
+<br /><hr /><h3>Klasy i obiekty</h3>
+<script id="s15">
+ function es6_15() {
+   class Osoba {
+    constructor(imie,nazwisko){
+        this.imie=imie;
+        this.nazwisko=nazwisko;
+    }
+    przedstawSie(){
+        console.log(this.imie+' '+this.nazwisko);
+    }
+}
+
+class Pracownik  extends Osoba{
+    constructor(nr,imie,nazwisko) {
+        super(imie,nazwisko);
+        this.nr=nr;
+    }
+}
+
+var dyrektor = new Pracownik(1,"Jan","Kowalski");
+dyrektor.przedstawSie();
+
+for (wlasnosc in dyrektor) { console.log(wlasnosc);}
+}
+</script>
+<button onclick="es6_15()">wykonaj 15</button>
+<button onclick="sdisp('15');">Pokaż 15</button>
+
+
+<br /><hr /><h3>Zmienne blokowe (zasięg wioczności)</h3>
+<script id="s16">
+ function es6_16() {
+  if (true) {
+    let zmienna = "wartosc";
+    const stala={v: 1};
+    stala.v=2;
+    console.log(stala.v);
+    console.log(zmienna);
+ }
+ // nie widoczna: console.log(stala.v);
+ // nie widoczna: console.log(zmienna);
+}</script>
+<button onclick="es6_16()">wykonaj 16</button>
+<button onclick="sdisp('16');">Pokaż 16</button>
+
+
+<br /><hr /><h3>for / of</h3>
+<script id="s17">
+function petla_for_of() {
+    var lista = ['a','b','c'];
+    var text = "";
+    for (let x of lista) {
+        text += x + "  ";
+    }
+    console.log(text);
+}
+</script>
+<button onclick="petla_for_of()">wykonaj 17</button>
+<button onclick="sdisp('17');">Pokaż 17</button>
+
+<br /><hr /><h3>Promise</h3>
+<script id="s18">
+ function es6_18() {
+  console.log('Start...',Date.now());
+  const delay=5000;
+  (new Promise(
+        (resolve, reject) => {  setTimeout( resolve,  delay ); }
+    )
+  ).then(
+          () => { console.log('KONIEC',Date.now()); }
+  );
+}
+</script>
+<button onclick="es6_18()">wykonaj 18</button>
+<button onclick="sdisp('18');">Pokaż 18</button>
+
+
+<br /><hr /><h3>Rozpakowanie struktur</h3>
+<script id="s19">
+ function es6_19() {
+   let osoby = [
+    { imie : "Jan", nazwisko : "Kowalski"},
+    { imie : "Józef", nazwisko : "Nowak"}
+   ];
+   for ({ imie, nazwisko } of osoby) {
+    console.log(imie+" "+nazwisko);
+   }
+}
+</script>
+<button onclick="es6_19()">wykonaj 19</button>
+<button onclick="sdisp('19');">Pokaż 19</button>
+<script>
+hljs.initHighlightingOnLoad();
+//hljs.configure({useBR: true});
+</script>
+</body>
+</html>

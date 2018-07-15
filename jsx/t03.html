@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+</head>
+<body>
+<div>
+Możemy definiować własne znaczniki!<br />
+Własności znaczników są przekazywane do funkcji jako parametr props
+</div>
+<pre>
+let Hello = (props) => (&lt;div&gt;Hello {props.toWho}!!!!&lt;/div&gt;);
+let element=&lt;Hello toWho='World' /&gt;;
+let div=document.getElementById('root');
+ReactDOM.render(element,div);
+</pre>
+<div id="root"></div>
+<script type="text/babel">
+let Hello = (props) => (<div>Hello {props.toWho}!!!!</div>);
+let element=<Hello toWho='World' />;
+let div=document.getElementById('root');
+ReactDOM.render(element,div);
+</script>
+</body>
+</html>

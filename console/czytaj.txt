@@ -1,0 +1,19 @@
+# https://babeljs.io/docs/plugins/preset-react/
+
+yarn init
+yarn add --save-dev babel babel-cli babel-preset-react react
+echo '{ "presets": ["react"] }' > .babelrc
+
+babel r01c.jsx > r01c.js
+
+echo '{ "presets": ["react","es2015"] }' > .babelrc
+babel r04c.jsx > r04c.js
+babel r06c.jsx > r06c.js
+
+#node r01c.js
+#node r02c.js
+#node r03c.js
+#node r04c.js
+node r06c.js
+
+

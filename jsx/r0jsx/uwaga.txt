@@ -1,0 +1,3 @@
+The require() function is not a client side function, recognized by the browser. 
+
+http://browserify.org/

@@ -1,0 +1,19 @@
+{
+  "name": "react-ay4yz1",
+  "description": "",
+  "homepage": "https://stackblitz.com/edit/react-ay4yz1",
+  "dependencies": {
+    "react": "16.1.1",
+    "react-dom": "16.1.1",
+    "react-scripts": "1.0.10",
+    "react-bootstrap": "0.32.1"
+  },
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

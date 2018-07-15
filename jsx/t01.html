@@ -1,0 +1,20 @@
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+<div>Dodanie react-dom pozwala na renderowanie fragmentów strony:</div>
+<pre>
+var element=React.createElement('div', null, 'Hello World!');
+var div=document.getElementById('root');
+ReactDOM.render(element,div);
+</pre>
+<div id="root"></div>
+<script>
+var element=React.createElement('div', null, 'Hello World!');
+var div=document.getElementById('root');
+ReactDOM.render(element,div);
+</script>
+</body>
+</html>

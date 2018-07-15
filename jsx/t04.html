@@ -1,0 +1,40 @@
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+</head>
+<body>
+<div>
+Poza props można użyć innych zmiennych lokalnych.<br />
+Zwróć uwagę na sposób zapisywania funkcji (nie można pominąć {}):
+</div>
+<pre>
+let Hello = (props) => {
+  let data=(new Date()).toDateString();
+  return(
+   &lt;div&gt;
+    &lt;h1&gt;Hello {props.toWho}!!!!&lt;/h1&gt;
+    &lt;p&gt;Data: {data}&lt;/p&gt;
+   &lt;/div&gt;); 
+};
+let element=&lt;Hello toWho='World' /&gt;;
+let div=document.getElementById('root');
+ReactDOM.render(element,div);
+</pre>
+<div id="root"></div>
+<script type="text/babel">
+let Hello = (props) => {
+  let data=(new Date()).toDateString();
+  return(
+   <div>
+    <h1>Hello {props.toWho}!!!!</h1>
+    <p>Data: {data}</p>
+   </div>); 
+};
+let element=<Hello toWho='World' />;
+let div=document.getElementById('root');
+ReactDOM.render(element,div);
+</script>
+</body>
+</html>

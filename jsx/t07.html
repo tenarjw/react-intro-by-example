@@ -1,0 +1,73 @@
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+</head>
+<body>
+<div>
+Możemy obsługiwać zdarzenia poprzez metody obiektu - pojawia się jednak problem z "this".
+</div>
+<pre>
+class Hello extends React.Component {
+ constructor(props) {
+   super(props);
+   this.state={licznik:0};
+ } 
+  handleClick() {
+   console.log('klik');
+// to spowoduje błąd:   this.setState({licznik: this.state.licznik+1, ...this.state});
+  }
+ render() { 
+  let data=(new Date()).toDateString();
+  return(
+   &lt;div&gt;
+    &lt;h1&gt;Hello {this,props.toWho}!!!!&lt;/h1&gt;
+    &lt;p&gt;Data: {data}&lt;/p&gt;
+	&lt;button onClick={this.handleClick}&gt;Licznik: {this.state.licznik} &lt;/button&gt;
+   &lt;/div&gt;); 
+ }
+}
+
+let element=&lt;Hello toWho='World' /&gt;;
+let div=document.getElementById('root');
+ReactDOM.render(element,div);
+</pre>
+<div id="root"></div>
+<script type="text/babel">
+
+class Hello extends React.Component {
+ 
+ constructor(props) {
+   super(props);
+   this.state={licznik:0};
+ } 
+ 
+/* ta składnia onlie nie działa: ? 
+  handleClick = () => {
+   this.setState({licznik: this.state.licznik+1});
+  }
+*/
+
+  handleClick0() {
+   console.log('klik');
+// to spowoduje błąd:   this.setState({licznik: this.state.licznik+1});
+  }
+ 
+ render() { 
+  let data=(new Date()).toDateString();
+  return(
+   <div>
+    <h1>Hello {this.props.toWho} !!!!!</h1>
+    <p>Data: {data}</p>
+	<button onClick={this.handleClick}>Licznik: {this.state.licznik} </button>
+   </div>); 
+ }
+}
+
+let element=<Hello toWho='World' />;
+let div=document.getElementById('root');
+ReactDOM.render(element,div);
+</script>
+</body>
+</html>
