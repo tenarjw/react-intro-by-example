@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <!-- react -->
+    <script src="https://unpkg.com/react@15.0.0/dist/react-with-addons.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15.0.0/dist/react-dom.min.js"></script>
+    <!-- babel core-->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var Input = React.createClass({
+        getInitialState: function() {
+          return {value: '?'};
+        },
+        handleChange: function(event) {
+          this.setState({value: event.target.value});
+        },
+        render: function () {
+          var value = this.state.value;
+          return (
+            <div>
+              <input type="text" value={value} onChange={this.handleChange} />
+              <p>{value}</p>
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(<Input/>, document.getElementById('example'));
+    </script>
+  </body>
+</html>

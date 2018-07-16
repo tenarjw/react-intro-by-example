@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- react -->
+    <script src="https://unpkg.com/react@15.0.0/dist/react-with-addons.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15.0.0/dist/react-dom.min.js"></script>
+    <!-- babel core-->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+<ol>
+<li><a href="https://unpkg.com/react@15.0.0/">https://unpkg.com/react@15.0.0/</a> - react.min.js
+</li>
+<li><a href="https://unpkg.com/react-dom@15.0.0/">https://unpkg.com/react-dom@15.0.0/</a> - react-dom.min.js
+</li>
+<li><a href="https://github.com/babel/babel-standalone">https://github.com/babel/babel-standalone</a> - babel.min.js
+</li>
+</ol>
+<div style="color:red">
+(browser.min.js is depreciat)
+</div>
+<br />
+<hr />
+    <div id="example"></div>
+    <script type="text/babel"  data-presets="es2015,react">
+      var Input = React.createClass({
+        render: function () {
+          return (
+            <div>
+              <h1> Hello World! </h1>
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(<Input/>, document.getElementById('example'));
+    </script>
+  </body>
+</html>
