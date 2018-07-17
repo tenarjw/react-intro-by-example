@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link }
+import { BrowserRouter as Router, Route, Link, withRouter }
   from 'react-router-dom';
 import 'App.css';
 
 import Layout  from './layout';
 
-let globalRootPage = null;
-
 let Page = (props) => {
-    if ((globalRootPage) &&
-     (globalRootPage.state.selected!==props.location.pathname))
-      globalRootPage.select(props.location.pathname);
-    return( props.location.pathname );
+    return props.location.pathname;
 }
+
+Page = withRouter(Page);
 
 export let Header = (props) => (
 <div className="jumbotron">
@@ -41,7 +38,7 @@ class Sidebar extends Component {
 
 class Content extends Component {
   render() {
-    if (this.props.selected==='/')
+    if (this.props.location.pathname==='/')
       return (
         <div>
        <h2>
@@ -55,7 +52,7 @@ class Content extends Component {
  			</p>
      </div>
       );
-    if (this.props.selected==='/about')
+    if (this.props.location.pathname==='/about')
         return (
          <div>autor: Jerzy Wawro, dla fundacji Galicea</div>
         );
@@ -63,19 +60,23 @@ class Content extends Component {
   }
 }
 
+Content = withRouter(Content);
+
 export default class App extends Component {
 
   constructor(props, context) {
     super(props, context);
     this.state = { selected : '/'};
-    globalRootPage = this;
   }
 
-  select = (path) => { this.setState({...this.state, selected: path}) }
+  select = (path) => { 
+    if (this.state.selected !== path) {
+      this.setState({...this.state, selected: path}); 
+    }
+  }
 
   navigation = (path) => {
    return (
-    <Router>
      <nav className="navbar navbar-default navbar-static-top">
          <div className="container">
              <ul className="nav">
@@ -97,12 +98,10 @@ export default class App extends Component {
              </ul>
 
              <p className="navbar-text navbar-right">
-                 <Route exact path="/" component={Page} />
-                 <Route path="/about"  component={Page} />
+              <Page />
              </p>
          </div>
      </nav>
-    </Router>
   );
  }
 
@@ -110,6 +109,8 @@ export default class App extends Component {
   let sidebar = <Sidebar />;
   let content = <Content selected={this.state.selected}/>;
   return(
+    // ROUTER OBEJMUJE CAŁY LAYOUT!!
+    <Router>    
    <Layout navigation = {this.navigation}
    sidebar = { sidebar }
    content = { content }
@@ -119,6 +120,7 @@ export default class App extends Component {
    company = {this.props.company}
    className = "page"
   />
+    </Router>
   )
  }
 }
