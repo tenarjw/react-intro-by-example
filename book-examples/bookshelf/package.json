@@ -1,0 +1,25 @@
+{
+  "name": "react-kwrizr",
+  "description": "",
+  "homepage": "https://stackblitz.com/edit/react-kwrizr",
+  "dependencies": {
+    "react": "16.1.1",
+    "react-dom": "16.1.1",
+    "react-scripts": "1.0.10",
+    "axios": "0.18.0",
+    "redux": "4.0.0",
+    "querystring": "0.2.0",
+    "react-redux": "5.0.7",
+    "redux-thunk": "2.3.0",
+    "redux-logger": "3.0.6",
+    "react-bootstrap": "0.32.1"
+  },
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

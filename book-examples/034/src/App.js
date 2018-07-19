@@ -20,7 +20,6 @@ export const getBooks = (callBack) => {
  )
 }
 
-//const getBooksAA = async (): Promise<any> => {
 async function getBooksAA() {
   const response = await axios(ADRES_URL);
   if (response.data.errors) throwError(response.data.message);
@@ -56,7 +55,10 @@ class App extends Component {
       <div>{
           this.state.dane &&
           this.state.dane.map(function (book, index) {
-            return <div>{index}: {book.title}</div>
+            return <div key={index}> 
+            {index}: {book.title} 
+            </div>;
+            //  atrybut key powyżej jest ważny!
           })
        }
       </div>
