@@ -1,0 +1,26 @@
+{
+  "name": "react-typescript",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/basarat/react-typescript.git"
+  },
+  "scripts": {
+    "build": "webpack -p",
+    "start": "webpack-dev-server -d --content-base ./public"
+  },
+  "dependencies": {
+    "@types/react": "16.4.2",
+    "@types/react-dom": "16.0.6",
+    "react": "16.4.1",
+    "react-dom": "16.4.1",
+    "ts-loader": "4.4.1",
+    "typescript": "2.9.2",
+    "webpack": "4.12.1",
+    "webpack-dev-server": "3.1.4"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.1.0"
+  }
+}

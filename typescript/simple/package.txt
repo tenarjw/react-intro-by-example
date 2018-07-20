@@ -1,0 +1,9 @@
+dodaj:
+
+  "scripts": {
+    "build": "webpack -p",
+    "start": "webpack-dev-server -d --content-base ./public"
+  },
+
+usun:
+"main"

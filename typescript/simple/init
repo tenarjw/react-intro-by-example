@@ -1,0 +1,9 @@
+bez main
+
+yarn init
+
+yarn add typescript  react react-dom @types/react @types/react-dom
+yarn add webpack webpack-dev-server ts-loader
+yarn add webpack-cli -D
+
+
