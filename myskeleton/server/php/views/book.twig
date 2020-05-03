@@ -1,0 +1,26 @@
+<table class="striped responsive-table">
+                    <thead>
+                    <tr>
+                        <th>Gość</th>
+                        <th>email</th>
+                        <th>telefon</th>
+                        <th>data od</th>
+                        <th>data do</th>
+                        <th>rodzaj pokoju</th>
+                        <th>cena</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+    {% for r in reservations %}
+        <tr>
+        <td>{{ r.name }}</td>
+        <td>{{ r.email }}</td>
+        <td>{{ r.phone }}</td>
+        <td>{{ r.check_in }}</td>
+        <td>{{ r.check_out }}</td>
+        <td>{{ r.roomCategory }}</td>
+        <td>{{ r.price }}</td>
+        </tr>
+    {% endfor %}
+                    </tbody>
+                </table>

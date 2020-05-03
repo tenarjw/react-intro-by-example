@@ -1,0 +1,39 @@
+<nav class="light-blue lighten-1" role="navigation">
+   <div class="nav-wrapper container">
+      <a href="/" class="brand-logo">
+      <i class="large material-icons">REZERWACJE</i> Panel Administratora</a>
+{% set currentUrl = global.request.getRequestUri() %}
+            <ul class="right hide-on-med-and-down">
+
+    <li class="menu-link  {{ relative_path('/') == currentUrl ? 'active' }}" >
+                <a href="{{ relative_path('/') }}">Home</a>
+    </li>
+    <li class="menu-link {{ relative_path('/hotel') == currentUrl ? 'active' }}">
+    <a  href="{{ relative_path('/hotel') }}">Hotel</a>
+    </li>
+    <li class="menu-link {{ relative_path('/book') == currentUrl ? 'active' }}">
+    <a  href="{{ relative_path('/book') }}">Rezerwcje</a>
+    </li>
+    <li class="menu-link {{ relative_path('/rooms') == currentUrl ? 'active' }}">
+    <a href="{{ relative_path('/rooms') }}">Pokoje</a>
+    </li>
+    <li class="menu-link {{ relative_path('/addroom') == currentUrl ? 'active' }}">
+    <a href="{{ relative_path('/addroom') }}">Nowy Pokój</a>
+    </li>
+    <li class="menu-link {{ relative_path('/images') == currentUrl ? 'active' }}">
+    <a href="{{ relative_path('/images') }}">Zdjęcia</a>
+    </li>
+   <li class="menu-link {{ relative_path('/trans') == currentUrl ? 'active' }}">
+    <a href="{{ relative_path('/trans') }}">Tłumaczenia</a>
+    </li>
+
+    
+                <li >
+                <a href="{{ relative_path('/login') }}">Login</a>
+                </li>
+            </ul>
+  </div>
+</nav>
+
+
+

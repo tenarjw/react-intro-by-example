@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rezerwacja - Administrator</title>
+    <meta charset="utf-8">
+    <meta http_equiv="X-UA_Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Rezerwacje">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+{% block stylesheets %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{ url('homepage') }}css/materialize.min.css" rel="stylesheet">
+    <link href="{{ url('homepage') }}css/style.css" rel="stylesheet">
+    <link href="{{ url('homepage') }}css/main.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url('homepage') }}img/favicon.png"/>        
+{% endblock %}
+</head>
+<body style="background: url('{{ relative_path('/') }}images/background.png');">
+ {{ include('_menu.html.twig') }}
+ {{ include('_header.html.twig') }}
+<div class="container">
+{% block content %}{% endblock %}
+</div>
+ {{ include('_footer.html.twig') }}
+</body>
+{% block javascripts %}{% endblock %}
+</html>
+

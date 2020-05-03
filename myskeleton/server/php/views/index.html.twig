@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+ 
+        <div class="section">
+            <h3 class="header center black-text">Pokoje</h3>
+            <div class="divider"></div>
+            <div class="row">
+            <div class="col s12">
+{{ include('rooms.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}

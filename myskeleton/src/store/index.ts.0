@@ -1,0 +1,40 @@
+import { applyMiddleware, createStore, Store } from 'redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import { definition, create, combine, StateOf } from 'redux-compact';
+
+import i18n from '../cfg/i18n'
+import CONFIG from 'cfg/config';
+
+interface IStore {
+  session? : string;
+  lang : string; 
+};
+
+const reduxStore = definition<IStore>()
+  .setDefault(
+    { session : undefined, 
+      lang : CONFIG.lang[0]
+    })
+  .addReducers({
+    setSession: (reduxStore: IStore, newSession : string) => (
+       {...reduxStore, session : newSession }),
+    setLang : (reduxStore: IStore, newLang : string) => 
+      {   i18n.changeLanguage(newLang)
+          return({...reduxStore, lang: newLang }) 
+       }
+  });
+
+
+const appState = combine({
+  reduxStore
+});
+  
+const { Actions, reduce } = create(appState);
+export type AppState = StateOf<typeof appState>;
+
+export const store: Store<AppState> = createStore(  reduce,
+  applyMiddleware(thunk, logger),
+);
+
+export { Actions  };

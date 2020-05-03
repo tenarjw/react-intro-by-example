@@ -1,0 +1,87 @@
+{
+    "info": {
+        "version": "1.0", 
+        "description": "Booking API", 
+        "title": "API Backend"
+    }, 
+    "paths": {
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "user"
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Success", 
+                        "schema": {
+                            "$ref": "#/definitions/Session"
+                        }
+                    }, 
+                    "404": {
+                        "description": "User not found"
+                    }
+                }, 
+                "parameters": [
+                    {
+                        "type": "string", 
+                        "description": "User name", 
+                        "name": "username", 
+                        "in": "query"
+                    }, 
+                    {
+                        "type": "string", 
+                        "description": "Password", 
+                        "name": "password", 
+                        "in": "query"
+                    }, 
+                    {
+                        "description": "An optional fields mask", 
+                        "format": "mask", 
+                        "type": "string", 
+                        "name": "X-Fields", 
+                        "in": "header"
+                    }
+                ], 
+                "operationId": "post_login"
+            }
+        }
+    }, 
+    "responses": {
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }, 
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        }
+    }, 
+    "tags": [
+        {
+            "name": "user", 
+            "description": "Login"
+        }
+    ], 
+    "basePath": "/", 
+    "produces": [
+        "application/json"
+    ], 
+    "definitions": {
+        "Session": {
+            "type": "object", 
+            "properties": {
+                "message": {
+                    "type": "string"
+                }, 
+                "session": {
+                    "type": "string"
+                }, 
+                "retcode": {
+                    "type": "integer"
+                }
+            }
+        }
+    }, 
+    "swagger": "2.0", 
+    "consumes": [
+        "application/json"
+    ]
+}

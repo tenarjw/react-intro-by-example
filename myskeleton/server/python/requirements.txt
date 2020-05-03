@@ -1,0 +1,12 @@
+flask
+flask-admin
+flask-security
+flask-script
+Flask-Assets
+pylti
+Flask-Principal
+flask-cache
+flask-debugtoolbar
+flask_bootstrap
+flask-restx
+flask-cors

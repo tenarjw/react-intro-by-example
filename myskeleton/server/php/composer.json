@@ -1,0 +1,57 @@
+{
+    "name": "virtual/rezerwacje",
+    "description": "API + Panel administratora - Silex",
+    "license": "MIT",
+    "type": "project",
+    "require": {
+            "php": "^7",
+            "symfony/event-dispatcher": "~2.8|^3.0",
+            "symfony/http-foundation": "~2.8|^3.0",
+            "symfony/http-kernel": "~2.8|^3.0",
+            "symfony/routing": "~2.8|^3.0",
+            "silex/web-profiler": "^2.0",
+            "silex/silex": "^2.2",
+            "symfony/stopwatch": "^2.8|^3.0",
+            "symfony/twig-bridge": "^3.4",
+            "symfony/twig-bundle": "^2.8|^3.0",
+            "symfony/web-profiler-bundle": "^2.8|^3.0",
+        "symfony/asset": "^3.4",
+        "symfony/browser-kit": "^3.4",
+        "symfony/class-loader": "^3.4",
+        "symfony/config": "^3.4",
+        "symfony/console": "^3.4",
+        "symfony/css-selector": "^3.4",
+        "symfony/debug": "^3.4",
+        "symfony/finder": "^3.4",
+        "symfony/form": "^3.4",
+        "symfony/monolog-bridge": "^3.4",
+        "symfony/process": "^3.4",
+        "symfony/security": "^3.4",
+        "symfony/translation": "^3.4",
+        "symfony/validator": "^3.4",
+        "monolog/monolog": "^1.24",
+        "twig/twig": "^2.11",
+        "swiftmailer/swiftmailer": "^6.2",
+        "doctrine/common": "^2.7",
+        "doctrine/dbal": "^2.5",
+        "imanee/imanee": "^1.2",
+        "components/jquery": "^3.3",
+        "mikey179/vfsStream": "^1.6",
+        "firebase/php-jwt": "^5.0",
+        "symfony/serializer": "^3.4"
+    },
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    },
+    "scripts": {
+        "run": [
+            "echo 'Started web server on http://localhost:8888'",
+            "php -S localhost:8888 -t web"
+        ]
+    }
+}

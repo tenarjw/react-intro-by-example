@@ -1,0 +1,11 @@
+{
+
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build:api": "npm run clean && node ./api/codegen.js && tsc -p ./api"
+  }
+
+}
