@@ -5,15 +5,16 @@ from flask import request, flash, redirect, render_template, url_for
 from flask import Flask
 from flask_restx import Api, Resource
 from flask_bootstrap import Bootstrap
-# api
-from rest.booking import api as booking_api
-from rest.login import api as login_api
 
 from flask_cors import CORS
 
-# flask app, Bootstrap
-app=Flask(__name__)
-#app.config['SECRET_KEY'] = 'secret_csrf' # zabezpieczenie przed csrf
+from myapi import app, api
+#app=Flask(__name__)
+
+#app.config['SECRET_KEY'] = 'secret_csrf' # CSRF protect
+app.config['RESTX_MASK_HEADER']=False
+app.config['RESTX_MASK_SWAGGER']=False
+app.config.setdefault('RESTX_MASK_SWAGGER', True) 
 
 # CORS
 CORS(app)
@@ -28,34 +29,25 @@ def after_request(response):
 Bootstrap(app)
 
 
+
 # home
 @app.route('/')
 @app.route('/index')
-#@login_required
-#@cache.cached(timeout=1000)
 def index():
   return render_template('index.html')
 
 
-#app.config.setdefault('RESTX_MASK_HEADER', 'mask') #'X-Fields') 
-app.config.setdefault('RESTX_MASK_SWAGGER', True) 
-
 # API
-api = Api(app,
-    endpoint="/",
-    version='1.0',
-    title='API Backend',
-    description='Booking API',
-    doc='/help/'
-)
-
 ns = api.namespace('api', description='Backend API')
+from rest.user import ns as user_ns
+api.add_namespace(user_ns)
 
-#api.add_namespace(booking_api)
-api.add_namespace(login_api)
+#from rest.res import ns as res_ns
+#api.add_namespace(res_ns)
 
 debug=True
 if __name__ == '__main__':
-  app.run(debug=debug)
-
-
+  app.run(debug=debug, 
+         host='0.0.0.0', 
+         port=5000, 
+         threaded=True)
