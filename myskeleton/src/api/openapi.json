@@ -1,87 +1,369 @@
 {
-    "info": {
-        "version": "1.0", 
-        "description": "Booking API", 
-        "title": "API Backend"
-    }, 
-    "paths": {
-        "/user/login": {
-            "post": {
-                "tags": [
-                    "user"
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Success", 
-                        "schema": {
-                            "$ref": "#/definitions/Session"
-                        }
-                    }, 
-                    "404": {
-                        "description": "User not found"
-                    }
-                }, 
-                "parameters": [
-                    {
-                        "type": "string", 
-                        "description": "User name", 
-                        "name": "username", 
-                        "in": "query"
-                    }, 
-                    {
-                        "type": "string", 
-                        "description": "Password", 
-                        "name": "password", 
-                        "in": "query"
-                    }, 
-                    {
-                        "description": "An optional fields mask", 
-                        "format": "mask", 
-                        "type": "string", 
-                        "name": "X-Fields", 
-                        "in": "header"
-                    }
-                ], 
-                "operationId": "post_login"
+  "swagger": "2.0",
+  "consumes": [
+    "application/json"
+  ],
+  "info": {
+    "version": "1.0",
+    "description": "res API",
+    "title": "API Backend"
+  },
+  "paths": {
+    "/res/new": {
+      "post": {
+        "tags": [
+          "res"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Reservations"
+              },
+              "type": "array"
             }
-        }
-    }, 
-    "responses": {
-        "MaskError": {
-            "description": "When any error occurs on mask"
-        }, 
-        "ParseError": {
-            "description": "When a mask can't be parsed"
-        }
-    }, 
-    "tags": [
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/NewReservation"
+            }
+          }
+        ],
+        "operationId": "post_res_new"
+      }
+    },
+    "/res/open/{username}/{session}": {
+      "parameters": [
         {
-            "name": "user", 
-            "description": "Login"
+          "required": true,
+          "type": "string",
+          "description": "ID zarejestrowanego klienta",
+          "name": "username",
+          "in": "path"
+        },
+        {
+          "required": true,
+          "type": "string",
+          "description": "Sesja klienta",
+          "name": "session",
+          "in": "path"
         }
-    ], 
-    "basePath": "/", 
-    "produces": [
-        "application/json"
-    ], 
-    "definitions": {
-        "Session": {
-            "type": "object", 
-            "properties": {
-                "message": {
-                    "type": "string"
-                }, 
-                "session": {
-                    "type": "string"
-                }, 
-                "retcode": {
-                    "type": "integer"
-                }
+      ],
+      "get": {
+        "tags": [
+          "res"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CategoriesAndReservations"
             }
+          }
+        },
+        "operationId": "get_res_open"
+      }
+    },
+    "/res/service": {
+      "post": {
+        "tags": [
+          "res"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Reservations"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/ServiceRequest"
+            }
+          }
+        ],
+        "operationId": "post_res_service"
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "operationId": "post_login",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "description": "User name",
+            "name": "username",
+            "in": "formData"
+          },
+          {
+            "type": "string",
+            "description": "Password",
+            "name": "password",
+            "in": "formData"
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ]
+      }
+    },
+    "/user/logout": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "operationId": "post_logout",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "description": "User name",
+            "name": "username",
+            "in": "formData"
+          },
+          {
+            "type": "string",
+            "description": "Session",
+            "name": "session",
+            "in": "formData"
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "MaskError": {
+      "description": "When any error occurs on mask"
+    },
+    "ParseError": {
+      "description": "When a mask can't be parsed"
+    }
+  },
+  "tags": [
+    {
+      "name": "user",
+      "description": "Login"
+    },
+    {
+      "name": "res",
+      "description": "Reservations"
+    }
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "Category": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Number of hosts"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Category ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Category Name"
         }
-    }, 
-    "swagger": "2.0", 
-    "consumes": [
-        "application/json"
-    ]
+      }
+    },
+    "Reservations": {
+      "type": "object",
+      "properties": {
+        "reservations": {
+          "items": {
+            "$ref": "#/definitions/Reservation"
+          },
+          "type": "array"
+        },
+        "message": {
+          "type": "string",
+          "description": "ret. message"
+        },
+        "retcode": {
+          "type": "integer",
+          "description": "ret. code"
+        }
+      }
+    },
+    "ServiceRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Login"
+        },
+        "host_id": {
+          "type": "integer",
+          "description": "Current Reservation"
+        },
+        "session": {
+          "type": "string",
+          "description": "Session id"
+        },
+        "description": {
+          "type": "string",
+          "description": "notes"
+        }
+      }
+    },
+    "CategoriesAndReservations": {
+      "type": "object",
+      "properties": {
+        "reservations": {
+          "items": {
+            "$ref": "#/definitions/Reservation"
+          },
+          "type": "array"
+        },
+        "message": {
+          "type": "string",
+          "description": "ret. message"
+        },
+        "retcode": {
+          "type": "integer",
+          "description": "ret. code"
+        },
+        "categories": {
+          "items": {
+            "$ref": "#/definitions/Category"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "Session": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "session": {
+          "type": "string"
+        },
+        "retcode": {
+          "type": "integer"
+        }
+      }
+    },
+    "NewReservation": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Login"
+        },
+        "category": {
+          "type": "integer",
+          "description": "category id"
+        },
+        "number": {
+          "type": "integer",
+          "description": "number of hosts"
+        },
+        "start": {
+          "type": "string",
+          "description": "Start date and time",
+          "format": "date-time"
+        },
+        "session": {
+          "type": "string",
+          "description": "Session id"
+        },
+        "key": {
+          "type": "string",
+          "description": "reservation key"
+        },
+        "time": {
+          "type": "integer",
+          "description": "how long"
+        }
+      }
+    },
+    "Reservation": {
+      "type": "object",
+      "properties": {
+        "busy": {
+          "type": "integer",
+          "description": "num hosts with busy state"
+        },
+        "description": {
+          "type": "string",
+          "description": "notes"
+        },
+        "free": {
+          "type": "integer",
+          "description": "num free hosts"
+        },
+        "start": {
+          "type": "string",
+          "description": "from...",
+          "format": "date-time"
+        },
+        "time": {
+          "type": "integer",
+          "description": "minutes"
+        },
+        "host_id": {
+          "type": "integer",
+          "description": "Host"
+        },
+        "category_id": {
+          "type": "integer",
+          "description": "Category"
+        },
+        "my": {
+          "type": "boolean",
+          "description": "my reservation"
+        }
+      }
+    }
+  }
 }
