@@ -2,7 +2,7 @@
 
 Materiały do książki:
 
-Jerzy Wawro, [React w przykładach](https://verbu.pl/epub/48/react-w-przykladach/)
+Jerzy Wawro, [React w przykładach](https://verbu.pl/epub/50/react_w_przykladach/)
 
 License:
 
